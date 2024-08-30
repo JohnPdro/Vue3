@@ -1,5 +1,4 @@
 <script setup>
-
 defineProps({
     user: {
         type: Object,
@@ -11,18 +10,26 @@ defineProps({
             avatar: '',
             email: ''
         })
-    }
+    },
+    selecao: Boolean, 
 });
+
+const emit = defineEmits(['selecao']);
+
+const enviaEmit = (id) => {
+    emit('selecao', id)
+}
 
 </script>
 
 <template>
     <div class="perfil">
-        <img :src="user.avatar" alt="Perfil">
+        <RouterLink :to="`/equipe/${user.id}`"><img :src="user.avatar" alt="Perfil"></RouterLink>
         <span class="text-gerente" v-if="user.first_name == 'Michael'">Gerente</span>
         <span class="text-operacional" v-else>Operacional</span>
         <span class="userName">{{ user.first_name }}</span>
         <span>{{ user.email }}</span>
+        <button class="botao" @click="enviaEmit(user.id)">{{ !selecao ? "Selecionar" : "Desmarcar" }}</button>
     </div>
 </template>
 
@@ -76,7 +83,7 @@ defineProps({
 }
 
 .text-gerente, .text-operacional{
-    color: #3542b8;
+    color: #3d81ff;
     font-size: 0.80rem !important;
     font-weight: bold;
 }

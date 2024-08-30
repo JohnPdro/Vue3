@@ -1,40 +1,70 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref, computed } from 'vue';
 import Usuario from './Usuario.vue';
+import { useFetch } from '@/composables/fetch';
 
-const users = ref([])
+const { data: users, error, carregando } = useFetch(`https://reqres.in/api/users?page=2`)
 
-const findInformations = async () => {
-    const req = await fetch(`https://reqres.in/api/users?page=2`);
-    const json = await req.json();
-    return json.data;
-};
+const idsSelecao = ref([])
 
-onMounted(async() => {
-    users.value = await findInformations()
+const adicionaSlelecao = (evento) => {
+    if (selectedId(evento)){
+        idsSelecao.value = idsSelecao.value.filter(x => x !== evento)
+        return
+    }
+    idsSelecao.value.push(evento)
+}
+
+const selectedUsers = computed(() =>{
+    if(!users.value) return []
+    return users.value.filter((x) => selectedId(x.id))
 })
 
-const vEmail = {
-    created(el, biding) {
-        el.innerHTML = `<a href="mailto:${biding.value}">${biding.value}</a>`
-    }
+const selectedId = (id) => {
+    return idsSelecao.value.includes(id);
 }
+
 </script>
 
 <template>
-<div class="pessoas">
-    <Usuario 
-    v-for="user in users" 
-    :key="user.div"
-    :user="user"
-    />
-</div>
+    <div class="selecionado">
+        <span v-for="selectedUser in selectedUsers" :key="selectedUser.id" class="card"> {{ selectedUser.first_name }}</span>
+    </div>
+    <div v-if="carregando">
+        <h3>Carregando...</h3>
+    </div>
+    <div class="pessoas" v-else>
+        <div v-for="user in users" :key="user.id" v-if="!error">
+            <Usuario 
+            :user="user"
+            :selecao="selectedId(user.id)"
+            @selecao="adicionaSlelecao"
+            />
+        </div>
+        <div v-else>
+            {{ error }}
+        </div>
+    </div>
 </template>
 
 <style scoped>
+.selecionado {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.selecionado > span{
+    background-color: #3542b8;
+    padding: 5px;
+    font-size: 0.785rem;
+    border-radius: 5px;
+    color: white;
+}
 .pessoas{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .text-gerente, .text-operacional{
     color: #3542b8;

@@ -1,16 +1,24 @@
 <script setup>
+import { useCargos } from '@/stores/cargos'
+import { storeToRefs } from 'pinia';
+
+const store = useCargos()
+const { totalCargos } = storeToRefs(store)
+
     const menus = [
-        { id: 1, name: 'Home'},
-        { id: 2, name: 'Sobre'},
-        { id: 3, name: 'Login'},
+        { id: 1, name: 'Home', path: '/'},
+        { id: 2, name: 'Equipe', path: '/equipe'},
     ]
 </script>
 
 <template>
     <nav>
         <span>Tutorial Vue</span>
+        Total Cargos {{ totalCargos }}
         <ul>
-            <li v-for="menu in menus" :key="menu.id"><a href="#">{{ menu.name }}</a></li>
+            <li v-for="menu in menus" :key="menu.id">
+                <RouterLink :to="menu.path">{{ menu.name }}</RouterLink>
+            </li>
         </ul>
     </nav>
 </template>

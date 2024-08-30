@@ -1,7 +1,5 @@
 <script setup>
 import Cabecalho from './components/Cabecalho.vue';
-import ListaUsuario from './components/ListaUsuario.vue';
-import Usuario from './components/Usuario.vue';
 </script>
 
 <template>
@@ -19,7 +17,7 @@ import Usuario from './components/Usuario.vue';
 
   <main>
     <!-- <Usuario /> -->
-     <ListaUsuario />
+     <RouterView />
   </main>
 </template>
 
@@ -32,5 +30,14 @@ import Usuario from './components/Usuario.vue';
 }
 header {
   line-height: 1.5;
+}
+[color-scheme="dark"]{
+  background-color: #28292e;
+  color: #d4d4d4;
+}
+
+[color-scheme="light"]{
+  background-color: #ffffff;
+  color: #28292e;
 }
 </style>
