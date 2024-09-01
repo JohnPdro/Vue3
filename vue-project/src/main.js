@@ -1,3 +1,5 @@
+import './css/style.css'
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import NavBar from './components/NavBar.vue'

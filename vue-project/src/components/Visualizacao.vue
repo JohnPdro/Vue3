@@ -1,15 +1,24 @@
 <script setup>
-import Cabecalho from './components/Cabecalho.vue';
-import Visualizacao from './components/Visualizacao.vue';
+import Cabecalho from './Cabecalho.vue';
 </script>
 
 <template>
-  <Visualizacao>
-    <template v-slot:cabecalho>
-      <Cabecalho />
-    </template>
-    <RouterView></RouterView>
-  </Visualizacao>
+  <NavBar />
+  <!-- OU
+  <component is="NavBar"></component> 
+  -->
+  <header>
+      <slot name="cabecalho"></slot>
+  </header>
+
+  <main>
+    <!-- <Usuario /> -->
+    <slot></slot>
+  </main>
+
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
 </template>
 
 <style>

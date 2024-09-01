@@ -27,13 +27,13 @@ const selectedId = (id) => {
 </script>
 
 <template>
-    <div class="selecionado">
-        <span v-for="selectedUser in selectedUsers" :key="selectedUser.id" class="card"> {{ selectedUser.first_name }}</span>
+    <div :class="lista.selecionado">
+        <span v-for="selectedUser in selectedUsers" :key="selectedUser.id" :class="lista.card"> {{ selectedUser.first_name }}</span>
     </div>
     <div v-if="carregando">
         <h3>Carregando...</h3>
     </div>
-    <div class="pessoas" v-else>
+    <div :class="lista.pessoas" v-else>
         <div v-for="user in users" :key="user.id" v-if="!error">
             <Usuario 
             :user="user"
@@ -47,7 +47,7 @@ const selectedId = (id) => {
     </div>
 </template>
 
-<style scoped>
+<style module="lista">
 .selecionado {
     display: flex;
     flex-wrap: wrap;

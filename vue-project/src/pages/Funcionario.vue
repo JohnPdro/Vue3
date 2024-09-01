@@ -29,19 +29,43 @@
     <div>
         <div v-if="carregando">Carregando...</div>
         <Usuario :user="user" v-else/>
-        <select v-model="cargoSelecionado">
+        <select 
+        :class="funcionario.botaoSelect"
+        v-model="cargoSelecionado">
             <option disabled value="">Selecione o cargo</option>
             <option v-for="cargo in cargos" :value="cargo" :key="cargo">{{ cargo }}</option>
         </select>
         <div>
-            <button @click="storeLogin.logarUsuario(user.first_name)">Logar</button>
+            <button 
+            :class="funcionario.botaoLogin"
+            @click="storeLogin.logarUsuario(user.first_name)">Logar</button>
         </div>
         <div>
-            <button @click="buscaCores()">Busca Cores</button>
+            <button
+            :class="funcionario.botaoCores"
+            @click="buscaCores()">Busca Cores</button>
         </div>
     </div>
 </template>
 
-<style scoped> 
+<style module="funcionario"> 
+.botaoLogin, .botaoCores{
+    background-color: #3d81ff;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.botaoSelect{
+    background-color: #e7e7e7;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
 
 </style>

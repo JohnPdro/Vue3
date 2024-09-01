@@ -23,17 +23,17 @@ const enviaEmit = (id) => {
 </script>
 
 <template>
-    <div class="perfil">
+    <div :class="usuario.perfil">
+        <button :class="usuario.botao" @click="enviaEmit(user.id)">{{ !selecao ? "Selecionar" : "Desmarcar" }}</button>
         <RouterLink :to="`/equipe/${user.id}`"><img :src="user.avatar" alt="Perfil"></RouterLink>
-        <span class="text-gerente" v-if="user.first_name == 'Michael'">Gerente</span>
-        <span class="text-operacional" v-else>Operacional</span>
-        <span class="userName">{{ user.first_name }}</span>
+        <span :class="usuario.textGerente" v-if="user.first_name == 'Michael'">Gerente</span>
+        <span :class="usuario.textOperacional" v-else>Operacional</span>
+        <span :class="usuario.userName">{{ user.first_name }}</span>
         <span>{{ user.email }}</span>
-        <button class="botao" @click="enviaEmit(user.id)">{{ !selecao ? "Selecionar" : "Desmarcar" }}</button>
     </div>
 </template>
 
-<style scoped>
+<style module="usuario">
 .formulario{
     margin: 0 auto;
     padding: 5px;
@@ -82,7 +82,7 @@ const enviaEmit = (id) => {
     font-weight: bold;
 }
 
-.text-gerente, .text-operacional{
+.textGerente, .textOperacional{
     color: #3d81ff;
     font-size: 0.80rem !important;
     font-weight: bold;
