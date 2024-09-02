@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <div>
+    <div :class="funcionario.box">
         <div v-if="carregando">Carregando...</div>
         <Usuario :user="user" v-else/>
         <select 
@@ -66,6 +66,13 @@
     border-radius: 3px;
     margin-bottom: 5px;
     cursor: pointer;
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 </style>
