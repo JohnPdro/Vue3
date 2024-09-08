@@ -12,5 +12,9 @@ import Footer from './components/Footer.vue';
 </template>
 
 <style>
-
+body{
+  height: 100vh;
+  background: #22c1c3;
+  background: linear-gradient(0deg, #22c1c3 0%, #8f2dfd 100%);
+}
 </style>

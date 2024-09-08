@@ -3,11 +3,22 @@
 </script>
 
 <template>
-    <div>
-        <h1>Hello World!</h1>
+    <div class="container mt-4">
+        <div class="card">
+            <h1 class="text-center">This is an about page</h1>
+            <div class="card-body">
+                teste
+            </div>
+        </div>
     </div>
 </template>
 
 <style scoped>
-
+    @media (min-width: 1024px) {
+        .about {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+    }
 </style>
