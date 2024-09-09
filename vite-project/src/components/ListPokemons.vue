@@ -3,7 +3,7 @@ const pokemon = defineProps(["name", "urlImagem"]);
 </script>
 
 <template>
-  <div class="col-4">
+  <div class="col-4 col-md-6 col-xl-3">
     <div class="card p-2 mb-3 card-list-pokemon">
       <p class="text-center">{{ pokemon.name }}</p>
       <img class="card-img-top" :src="urlImagem" alt="Imagem" height="80" />
