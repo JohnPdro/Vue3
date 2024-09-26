@@ -21,7 +21,7 @@ const emit = defineEmits<{
 }>();
 
 // methods
-const handleTextInput = (e: Event) => {
+const handleTextInput = (e: Event): void => {
   const textarea = e.target as HTMLTextAreaElement;
   if (textarea.value.length <= maxChars) {
     body.value = textarea.value;
